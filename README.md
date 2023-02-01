@@ -21,12 +21,12 @@ Use the `auth` cli command to automatically apply your permissions to the auth s
 
 You can specify the address (and port) of the auth service instance you use in the `AUTH_SERVER_ADDRESS` env variable (default: `127.0.0.1:9000`).
 
-The needed schema for auth is a simple enum containing all your permissions. Example: 
+The needed schema for auth is a simple enum containing all your permissions. Example:
 
 ```graphql
-enum Permissions {
-	USER_READ
-	USER_WRITE
+enum Permission {
+    USER_READ
+    USER_WRITE
 }
 ```
 
