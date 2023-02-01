@@ -48,6 +48,53 @@ management client:
 const managementClient = await newManagementClient();
 ```
 
+## Get all scopes (permissions)
+
+The `clientId` paramenter is optional. If none is given the default client will be used.
+
+```typescript
+const scopes = await managementClient.getScopes();
+```
+
+## Create a scope (permission)
+
+The `clientId` paramenter is optional. If none is given the default client will be used.
+
+```typescript
+await managementClient.createScope("PERMISSION_NAME");
+```
+
+## Delete a scope (permission)
+
+The `clientId` paramenter is optional. If none is given the default client will be used.
+
+```typescript
+await managementClient.deleteScope("PERMISSION_NAME");
+```
+
+## Get all roles
+
+```typescript
+const roles = await managementClient.getRoles("TENANT_ID");
+```
+
+## Upsert a role
+
+```typescript
+await managementClient.upsertRole("TENANT_ID", "ROLE_ID", [
+    {
+        scopeName: "PERMISSION_NAME",
+        // optional: clientId: If none is given the default client will be used
+    },
+]);
+```
+
+## Delete a role
+
+```typescript
+await managementClient.deleteRole("TENANT_ID", "ROLE_ID");
+```
+
 ### Gracefully close the clients
 
 You won't lose any data if you don't. Use it for your peace of mind.
