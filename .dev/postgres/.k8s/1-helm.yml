@@ -1,0 +1,4 @@
+architecture: standalone
+
+auth:
+  postgresPassword: change-me

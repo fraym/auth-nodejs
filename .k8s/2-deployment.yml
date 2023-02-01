@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-nodejs
+  namespace: auth-nodejs
+  labels:
+    app: auth-nodejs
+spec:
+  selector:
+    matchLabels:
+      app: auth-nodejs
+  template:
+    metadata:
+      labels:
+        app: auth-nodejs
+    spec:
+      containers:
+        - name: auth-nodejs
+          image: golang:alpine
+          imagePullPolicy: Never
+          command: ["sleep", "infinity"]

@@ -1,0 +1,47 @@
+{
+    "name": "@fraym/auth",
+    "version": "0.5.0",
+    "license": "UNLICENSED",
+    "homepage": "https://github.com/fraym/auth-nodejs",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/fraym/auth-nodejs.git"
+    },
+    "description": "nodejs client implementation for our auth service",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 0",
+        "format": "prettier --write \"**/*.{ts,tsx,json}\"",
+        "lint": "prettier --check \"**/*.{ts,tsx,json}\"",
+        "build": "npm run clean && tsc && chmod +x dist/cmd/auth.js",
+        "clean": "rm -rf dist",
+        "prepublishOnly": "npm test && npm run lint && npm run build",
+        "preversion": "npm run lint",
+        "cmd": "dist/cmd/auth.js"
+    },
+    "files": [
+        "dist/**/*"
+    ],
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "bin": {
+        "auth": "dist/cmd/auth.js"
+    },
+    "dependencies": {
+        "@fraym/auth-proto": "^0.4.0",
+        "@graphql-tools/graphql-file-loader": "^7.5.11",
+        "@graphql-tools/load": "^7.8.6",
+        "@grpc/grpc-js": "1.7.2",
+        "dotenv": "^16.0.3",
+        "graphql": "^16.6.0",
+        "yargs": "^17.6.2"
+    },
+    "devDependencies": {
+        "@becklyn/prettier": "^1.0.2",
+        "@types/uuid": "^8.3.4",
+        "@types/yargs": "^17.0.13",
+        "prettier": "^2.7.1",
+        "typescript": "^4.8.4",
+        "uuid": "^9.0.0"
+    },
+    "prettier": "@becklyn/prettier"
+}

@@ -1,0 +1,4 @@
+replicaCount: 1
+auth:
+  rbac:
+    rootPassword: etcd1234
