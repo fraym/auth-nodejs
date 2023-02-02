@@ -2,10 +2,14 @@ import { ManagementServiceClient } from "@fraym/auth-proto";
 import { credentials } from "@grpc/grpc-js";
 import { ClientConfig, useConfigDefaults } from "../config/config";
 import { createNewScope } from "./createScope";
+import { createNewUser, CreateUserResponse } from "./createUser";
 import { deleteExistingRole } from "./deleteRole";
 import { deleteExistingScope } from "./deleteScope";
+import { deleteExistingUser } from "./deleteUser";
 import { getAllRoles, Role } from "./getRoles";
 import { getAllScopes } from "./getScopes";
+import { getAllUsers, User } from "./getUsers";
+import { updateExistingUser } from "./updateUser";
 import { createOrUpdateRole, UpsertRoleScope } from "./upsertRole";
 
 export interface ManagementClient {
@@ -15,6 +19,29 @@ export interface ManagementClient {
     upsertRole: (tenantId: string, id: string, allowedScopes: UpsertRoleScope[]) => Promise<void>;
     deleteRole: (tenantId: string, id: string) => Promise<void>;
     getRoles: (tenantId: string) => Promise<Role[]>;
+    createUser: (
+        tenantId: string,
+        email: string,
+        assignedRoleIds: string[],
+        login?: string,
+        displayName?: string,
+        password?: string,
+        active?: boolean,
+        blockedUntil?: Date
+    ) => Promise<CreateUserResponse>;
+    updateUser: (
+        tenantId: string,
+        id: string,
+        email: string,
+        assignedRoleIds: string[],
+        login?: string,
+        displayName?: string,
+        password?: string,
+        active?: boolean,
+        blockedUntil?: Date
+    ) => Promise<void>;
+    deleteUser: (tenantId: string, id: string) => Promise<void>;
+    getUsers: (tenantId: string) => Promise<User[]>;
     close: () => Promise<void>;
 }
 
@@ -54,6 +81,62 @@ export const newManagementClient = async (config?: ClientConfig): Promise<Manage
         return await getAllRoles(tenantId, serviceClient);
     };
 
+    const createUser = async (
+        tenantId: string,
+        email: string,
+        assignedRoleIds: string[],
+        login: string = "",
+        displayName: string = "",
+        password: string = "",
+        active: boolean = false,
+        blockedUntil: Date = new Date(0)
+    ) => {
+        return await createNewUser(
+            tenantId,
+            login,
+            email,
+            displayName,
+            password,
+            assignedRoleIds,
+            active,
+            blockedUntil,
+            serviceClient
+        );
+    };
+
+    const updateUser = async (
+        tenantId: string,
+        id: string,
+        email: string,
+        assignedRoleIds: string[],
+        login: string = "",
+        displayName: string = "",
+        password: string = "",
+        active: boolean = false,
+        blockedUntil: Date = new Date(0)
+    ) => {
+        return await updateExistingUser(
+            tenantId,
+            id,
+            login,
+            email,
+            displayName,
+            password,
+            assignedRoleIds,
+            active,
+            blockedUntil,
+            serviceClient
+        );
+    };
+
+    const deleteUser = async (tenantId: string, id: string) => {
+        return await deleteExistingUser(tenantId, id, serviceClient);
+    };
+
+    const getUsers = async (tenantId: string) => {
+        return await getAllUsers(tenantId, serviceClient);
+    };
+
     const close = async () => {
         serviceClient.close();
     };
@@ -65,6 +148,10 @@ export const newManagementClient = async (config?: ClientConfig): Promise<Manage
         upsertRole,
         deleteRole,
         getRoles,
+        createUser,
+        updateUser,
+        deleteUser,
+        getUsers,
         close,
     };
 };

@@ -95,6 +95,68 @@ await managementClient.upsertRole("TENANT_ID", "ROLE_ID", [
 await managementClient.deleteRole("TENANT_ID", "ROLE_ID");
 ```
 
+## Create a user
+
+When creating a user and not providing a `password`, the create function will return a `setInitialPasswordToken`. This string can be used to authorize the initial password change of a user. Use it within the graphql api to change the passwort of a user.
+
+Required parameters:
+
+```typescript
+const { id, setInitialPasswordToken } = await managementClient.createUser("TENANT_ID", "E-MAIL", [
+    "ROLE_ID",
+]);
+```
+
+With all optional parameters:
+
+```typescript
+const isActive = true;
+const blockedUntil = new Date();
+const {id, setInitialPasswordToken} = await managementClient.createUser("TENANT_ID", "E-MAIL", ["ROLE_ID"]. "LOGIN_NAME", "DISPLAY_NAME", "PASSWORD", isActive, blockedUntil);
+```
+
+`LOGIN_NAME`: A name used for login instead of the email address.
+`DISPLAY_NAME`: A name to display in the applications.
+`PASSWORD`: Set the initial password of the user or leave empty if you want the user to set it.
+`isActive`: Activate or deactivate a user.
+`blockedUntil`: Block a user until a specific date.
+
+## Update a user
+
+When updating a user and not providing a `password`, the password will stay the same. Otherwise it will be changed to the given password.
+
+Required parameters:
+
+```typescript
+await managementClient.updateUser("TENANT_ID", "USER_ID", "E-MAIL", ["ROLE_ID"]);
+```
+
+With all optional parameters:
+
+```typescript
+const isActive = true;
+const blockedUntil = new Date();
+await managementClient.createUser("TENANT_ID", "USER_ID", "E-MAIL", ["ROLE_ID"]. "LOGIN_NAME", "DISPLAY_NAME", "PASSWORD", isActive, blockedUntil);
+```
+
+`LOGIN_NAME`: A name used for login instead of the email address.
+`DISPLAY_NAME`: A name to display in the applications.
+`PASSWORD`: Use this to reset the password of a user.
+`isActive`: Activate or deactivate a user.
+`blockedUntil`: Block a user until a specific date.
+
+## Delete a user
+
+```typescript
+await managementClient.deleteUser("TENANT_ID", "USER_ID");
+```
+
+## Get all users
+
+```typescript
+const users = await managementClient.getUsers("TENANT_ID");
+```
+
 ### Gracefully close the clients
 
 You won't lose any data if you don't. Use it for your peace of mind.
