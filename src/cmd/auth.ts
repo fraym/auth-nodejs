@@ -79,8 +79,6 @@ const migratePermissions = async (permissions: string[], serverAddress: string) 
             `Creating ${permissionsToCreate.length} permissions: ${permissionsToCreate}...`
         );
         for (let i = 0; i < permissionsToCreate.length; i++) {
-            console.log("i", i);
-
             await managementClient.createScope(permissionsToCreate[i]);
         }
         console.log(`Created ${permissionsToCreate.length} permissions`);
@@ -91,7 +89,6 @@ const migratePermissions = async (permissions: string[], serverAddress: string) 
             `Removing ${permissionsToDelete.length} permissions: ${permissionsToDelete}...`
         );
         for (let i = 0; i < permissionsToDelete.length; i++) {
-            console.log("i", i);
             await managementClient.deleteScope(permissionsToDelete[i]);
         }
         console.log(`Removed ${permissionsToDelete.length} permissions`);
