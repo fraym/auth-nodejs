@@ -80,13 +80,30 @@ const roles = await managementClient.getRoles("TENANT_ID");
 
 ## Upsert a role
 
+You can create roles without providing a role-id. The id of the new role will be returned:
+
 ```typescript
-await managementClient.upsertRole("TENANT_ID", "ROLE_ID", [
+const roleId = await managementClient.upsertRole("TENANT_ID", [
     {
         scopeName: "PERMISSION_NAME",
         // optional: clientId: If none is given the default client will be used
     },
 ]);
+```
+
+You can also upsert a role by providing the role-id:
+
+```typescript
+const roleId = await managementClient.upsertRole(
+    "TENANT_ID",
+    [
+        {
+            scopeName: "PERMISSION_NAME",
+            // optional: clientId: If none is given the default client will be used
+        },
+    ],
+    "ROLE_ID"
+);
 ```
 
 ## Delete a role

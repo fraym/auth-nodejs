@@ -16,7 +16,11 @@ export interface ManagementClient {
     createScope: (name: string, clientId?: string) => Promise<void>;
     deleteScope: (name: string, clientId?: string) => Promise<void>;
     getScopes: (clientId?: string) => Promise<string[]>;
-    upsertRole: (tenantId: string, id: string, allowedScopes: UpsertRoleScope[]) => Promise<void>;
+    upsertRole: (
+        tenantId: string,
+        allowedScopes: UpsertRoleScope[],
+        id?: string
+    ) => Promise<string>;
     deleteRole: (tenantId: string, id: string) => Promise<void>;
     getRoles: (tenantId: string) => Promise<Role[]>;
     createUser: (
@@ -69,7 +73,11 @@ export const newManagementClient = async (config?: ClientConfig): Promise<Manage
         return await getAllScopes(clientId, serviceClient);
     };
 
-    const upsertRole = async (tenantId: string, id: string, allowedScopes: UpsertRoleScope[]) => {
+    const upsertRole = async (
+        tenantId: string,
+        allowedScopes: UpsertRoleScope[],
+        id: string = ""
+    ) => {
         return await createOrUpdateRole(tenantId, id, allowedScopes, serviceClient);
     };
 

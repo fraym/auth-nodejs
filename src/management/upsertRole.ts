@@ -10,8 +10,8 @@ export const createOrUpdateRole = async (
     id: string,
     allowedScopes: UpsertRoleScope[],
     serviceClient: ManagementServiceClient
-): Promise<void> => {
-    return new Promise<void>((resolve, reject) => {
+): Promise<string> => {
+    return new Promise<string>((resolve, reject) => {
         serviceClient.upsertRole(
             {
                 tenantId,
@@ -23,13 +23,13 @@ export const createOrUpdateRole = async (
                     };
                 }),
             },
-            error => {
+            (error, response) => {
                 if (error) {
                     reject(error.message);
                     return;
                 }
 
-                resolve();
+                resolve(response.id);
             }
         );
     });

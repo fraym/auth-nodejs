@@ -1,3 +1,8 @@
+# v0.3.0
+
+-   (bc) Make role id optional in `upsertRole`
+-   (feature) Return id of upserted role
+
 # v0.2.1
 
 -   (bug) Remove debug code
