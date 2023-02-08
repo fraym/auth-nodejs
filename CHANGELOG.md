@@ -1,3 +1,7 @@
+# v0.3.1
+
+-   (bug) Use latest version of @grpc/grpc-js
+
 # v0.3.0
 
 -   (bc) Make role id optional in `upsertRole`
