@@ -1,3 +1,9 @@
+# v0.4.0
+
+-   (feature) Add `generateJwt` function
+-   (feature) Add `addDataToJwt` function
+-   (feature) Add `getTokenData` function
+
 # v0.3.1
 
 -   (bug) Use latest version of @grpc/grpc-js

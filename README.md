@@ -38,7 +38,51 @@ Use a `.env` file or env variables to configure cte clients and the command:
 AUTH_SERVER_ADDRESS=127.0.0.1:9000
 ```
 
-## Usage
+## JWT functions
+
+### Create a new JWT for usage with fraym
+
+```typescript
+const jwt = await generateJwt(appSecret, tenantId, scopes, data, expirationTime);
+```
+
+Parameters:
+
+-   `appSecret`: the secret used to sign the jwt
+-   `tenantId`: the id of the tenant to use
+-   `scopes`: (optional) list of scopes available in this token
+-   `data`: (optional) data added to the `data` field of the token
+-   `expirationTime`: (optional) string is resolved to a time span and added to the current timestamp to calculate the expiration time
+
+### Add data to an existing JWT
+
+Note: this will validate the existing token first.
+
+```typescript
+const jwt = await addDataToJwt(appSecret, token, data);
+```
+
+Parameters:
+
+-   `appSecret`: the secret used to sign the jwt
+-   `token`: the existing jwt
+-   `data`: (optional) data added to the `data` field of the token, existing fields in the data object will be overwritten
+
+### Validate the token and get associated data
+
+Get scopes:
+
+```typescript
+const { scopes, userId, exp } = await getTokenData(appSecret, token, requireUserId);
+```
+
+Parameters:
+
+-   `appSecret`: the secret used to sign the jwt
+-   `token`: the existing jwt
+-   `requireUserId`: (optional, default: `true`) If set to true the function will throw an error if it cannot determine the id of the user that owns the jwt
+
+## Client Usage
 
 ### Create the client
 
