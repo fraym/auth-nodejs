@@ -1,3 +1,7 @@
+# vNext
+
+-   (bc) Remove token util from index export
+
 # v0.4.0
 
 -   (feature) Add `generateJwt` function
