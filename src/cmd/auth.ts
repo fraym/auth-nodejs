@@ -14,11 +14,15 @@ const run = async () => {
         .config({
             schemaGlob: "./src/**/*.graphql",
             serverAddress: "127.0.0.1:9000",
+            httpServerAddress: "http://127.0.0.1",
+            httpApiToken: "",
         })
         .pkgConf("auth").argv;
 
     let schemaGlob: string = argv.schemaGlob as string;
     let serverAddress: string = argv.serverAddress as string;
+    let httpServerAddress: string = argv.httpServerAddress as string;
+    let httpApiToken: string = argv.httpApiToken as string;
 
     if (process.env.AUTH_SCHEMA_GLOB) {
         schemaGlob = process.env.AUTH_SCHEMA_GLOB;
@@ -28,13 +32,21 @@ const run = async () => {
         serverAddress = process.env.AUTH_SERVER_ADDRESS;
     }
 
+    if (process.env.AUTH_HTTP_SERVER_ADDRESS) {
+        httpServerAddress = process.env.AUTH_HTTP_SERVER_ADDRESS;
+    }
+
+    if (process.env.AUTH_HTTP_API_TOKEN) {
+        httpApiToken = process.env.AUTH_HTTP_API_TOKEN;
+    }
+
     const schema = await loadSchema(`${schemaGlob}`, {
         loaders: [new GraphQLFileLoader()],
     });
 
     const permissions = getSchemaPermissions(schema);
 
-    await migratePermissions(permissions, serverAddress);
+    await migratePermissions(permissions, serverAddress, httpServerAddress, httpApiToken);
 };
 
 const getSchemaPermissions = (schema: GraphQLSchema): string[] => {
@@ -59,8 +71,17 @@ const getSchemaPermissions = (schema: GraphQLSchema): string[] => {
     return permissions;
 };
 
-const migratePermissions = async (permissions: string[], serverAddress: string) => {
-    const managementClient = await newManagementClient({ serverAddress });
+const migratePermissions = async (
+    permissions: string[],
+    serverAddress: string,
+    httpServerAddress: string,
+    httpApiToken: string
+) => {
+    const managementClient = await newManagementClient({
+        serverAddress,
+        httpServerAddress,
+        httpApiToken,
+    });
     const existingPermissions = (await managementClient.getScopes()).filter(
         permission => !permission.startsWith("FRAYM_")
     );

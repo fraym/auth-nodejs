@@ -1,6 +1,9 @@
 # vNext
 
+# v0.5.0
+
 -   (bc) Remove token util from index export
+-   (bc) Use http migration api
 
 # v0.4.0
 

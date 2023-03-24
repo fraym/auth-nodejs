@@ -21,6 +21,11 @@ Use the `auth` cli command to automatically apply your permissions to the auth s
 
 You can specify the address (and port) of the auth service instance you use in the `AUTH_SERVER_ADDRESS` env variable (default: `127.0.0.1:9000`).
 
+In case of scopes api you need to configure the HTTP api:
+
+-   `AUTH_HTTP_SERVER_ADDRESS`: Http api url of the auth service (default: `http://127.0.0.1`)
+-   `AUTH_HTTP_API_TOKEN`: The value of that token has to match the token configured in the auth service
+
 The needed schema for auth is a simple enum containing all your permissions. Example:
 
 ```graphql
@@ -36,6 +41,8 @@ Use a `.env` file or env variables to configure cte clients and the command:
 
 ```env
 AUTH_SERVER_ADDRESS=127.0.0.1:9000
+AUTH_HTTP_SERVER_ADDRESS=http://127.0.0.1
+AUTH_HTTP_API_TOKEN=
 ```
 
 ## JWT functions
@@ -100,6 +107,8 @@ The `clientId` paramenter is optional. If none is given the default client will 
 const scopes = await managementClient.getScopes();
 ```
 
+Note: you need to configure `AUTH_HTTP_SERVER_ADDRESS` and `AUTH_HTTP_API_TOKEN` to use this function.
+
 ## Create a scope (permission)
 
 The `clientId` paramenter is optional. If none is given the default client will be used.
@@ -108,6 +117,8 @@ The `clientId` paramenter is optional. If none is given the default client will 
 await managementClient.createScope("PERMISSION_NAME");
 ```
 
+Note: you need to configure `AUTH_HTTP_SERVER_ADDRESS` and `AUTH_HTTP_API_TOKEN` to use this function.
+
 ## Delete a scope (permission)
 
 The `clientId` paramenter is optional. If none is given the default client will be used.
@@ -115,6 +126,8 @@ The `clientId` paramenter is optional. If none is given the default client will 
 ```typescript
 await managementClient.deleteScope("PERMISSION_NAME");
 ```
+
+Note: you need to configure `AUTH_HTTP_SERVER_ADDRESS` and `AUTH_HTTP_API_TOKEN` to use this function.
 
 ## Get all roles
 

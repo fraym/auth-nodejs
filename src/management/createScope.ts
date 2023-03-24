@@ -1,24 +1,19 @@
-import { ManagementServiceClient } from "@fraym/auth-proto";
+import { ClientConfig } from "config/config";
 
 export const createNewScope = async (
     name: string,
     clientId: string,
-    serviceClient: ManagementServiceClient
+    config: ClientConfig
 ): Promise<void> => {
-    return new Promise<void>((resolve, reject) => {
-        serviceClient.createScope(
-            {
-                name,
-                clientId,
-            },
-            error => {
-                if (error) {
-                    reject(error.message);
-                    return;
-                }
-
-                resolve();
-            }
-        );
+    await fetch(`${config.httpServerAddress}/management/scopes`, {
+        method: "POST",
+        headers: {
+            Authorization: `Bearer ${config.httpApiToken}`,
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            clientId,
+            name,
+        }),
     });
 };

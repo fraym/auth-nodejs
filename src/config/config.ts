@@ -1,8 +1,12 @@
 import { config } from "dotenv";
 
 export interface ClientConfig {
-    // serverAddress: address of the projection service
+    // serverAddress: address of the auth service
     serverAddress: string;
+    // serverAddress: http address of the auth service
+    httpServerAddress: string;
+    // apiToken: auth token for the http api
+    httpApiToken: string;
     // keepaliveInterval: grpc connection keepalive ping interval in milliseconds
     keepaliveInterval?: number;
     // keepaliveTimeout: grpc connection keepalive ping timeout in milliseconds
@@ -13,6 +17,8 @@ export const getEnvConfig = (): ClientConfig => {
     config();
 
     const serverAddress = process.env.AUTH_SERVER_ADDRESS ?? "";
+    const httpServerAddress = process.env.AUTH_HTTP_SERVER_ADDRESS ?? "";
+    const httpApiToken = process.env.AUTH_HTTP_API_TOKEN ?? "";
     let keepaliveInterval: number | undefined;
     let keepaliveTimeout: number | undefined;
 
@@ -29,6 +35,8 @@ export const getEnvConfig = (): ClientConfig => {
 
     return {
         serverAddress,
+        httpServerAddress,
+        httpApiToken,
         keepaliveInterval,
         keepaliveTimeout,
     };
@@ -41,6 +49,8 @@ export const useConfigDefaults = (config?: ClientConfig): Required<ClientConfig>
 
     return {
         serverAddress: config.serverAddress,
+        httpServerAddress: config.httpServerAddress,
+        httpApiToken: config.httpApiToken,
         keepaliveTimeout: config.keepaliveTimeout ?? 3 * 1000,
         keepaliveInterval: config.keepaliveInterval ?? 40 * 1000,
     };

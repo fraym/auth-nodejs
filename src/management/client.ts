@@ -50,27 +50,27 @@ export interface ManagementClient {
 }
 
 export const newManagementClient = async (config?: ClientConfig): Promise<ManagementClient> => {
-    config = useConfigDefaults(config);
+    const currentConfig = useConfigDefaults(config);
     const serviceClient = new ManagementServiceClient(
-        config.serverAddress,
+        currentConfig.serverAddress,
         credentials.createInsecure(),
         {
-            "grpc.keepalive_time_ms": config.keepaliveInterval,
-            "grpc.keepalive_timeout_ms": config.keepaliveTimeout,
+            "grpc.keepalive_time_ms": currentConfig.keepaliveInterval,
+            "grpc.keepalive_timeout_ms": currentConfig.keepaliveTimeout,
             "grpc.keepalive_permit_without_calls": 1,
         }
     );
 
     const createScope = async (name: string, clientId: string = "") => {
-        await createNewScope(name, clientId, serviceClient);
+        await createNewScope(name, clientId, currentConfig);
     };
 
     const deleteScope = async (name: string, clientId: string = "") => {
-        await deleteExistingScope(name, clientId, serviceClient);
+        await deleteExistingScope(name, clientId, currentConfig);
     };
 
     const getScopes = async (clientId: string = "") => {
-        return await getAllScopes(clientId, serviceClient);
+        return await getAllScopes(clientId, currentConfig);
     };
 
     const upsertRole = async (

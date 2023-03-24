@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: auth-nodejs
-  namespace: auth-nodejs
+  namespace: fraym
   labels:
     app: auth-nodejs
 spec:

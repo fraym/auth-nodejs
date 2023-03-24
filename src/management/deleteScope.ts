@@ -1,24 +1,19 @@
-import { ManagementServiceClient } from "@fraym/auth-proto";
+import { ClientConfig } from "config/config";
 
 export const deleteExistingScope = async (
     name: string,
     clientId: string,
-    serviceClient: ManagementServiceClient
+    config: ClientConfig
 ): Promise<void> => {
-    return new Promise<void>((resolve, reject) => {
-        serviceClient.deleteScope(
-            {
-                name,
-                clientId,
-            },
-            error => {
-                if (error) {
-                    reject(error.message);
-                    return;
-                }
-
-                resolve();
-            }
-        );
+    await fetch(`${config.httpServerAddress}/management/scopes`, {
+        method: "DELETE",
+        headers: {
+            Authorization: `Bearer ${config.httpApiToken}`,
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            clientId,
+            name,
+        }),
     });
 };
