@@ -66,13 +66,13 @@ export const getTokenData = async (
         throw Error("expiration time is missing in JWT");
     }
 
-    if (requireUserId && !payload.jti) {
-        throw Error("expiration time is missing in JWT");
+    if (requireUserId && !payload.sub) {
+        throw Error("user id (subject) is missing in JWT");
     }
 
     return {
         scopes: (payload.scopes as string[]) ?? [],
-        userId: (payload.jti as string) ?? "",
+        userId: (payload.sub as string) ?? "",
         exp: payload.exp,
     };
 };

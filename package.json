@@ -1,6 +1,7 @@
 {
     "name": "@fraym/auth",
-    "version": "0.5.0",
+    "version": "0.5.1",
+    "public": true,
     "license": "UNLICENSED",
     "homepage": "https://github.com/fraym/auth-nodejs",
     "repository": {

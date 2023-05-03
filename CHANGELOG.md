@@ -1,5 +1,9 @@
 # vNext
 
+# v0.5.1
+
+-   (bug) Fix user id extraction
+
 # v0.5.0
 
 -   (bc) Remove token util from index export
