@@ -1,8 +1,7 @@
 {
     "name": "@fraym/auth",
-    "version": "0.5.1",
-    "public": true,
-    "license": "UNLICENSED",
+    "version": "0.5.2",
+    "license": "MIT",
     "homepage": "https://github.com/fraym/auth-nodejs",
     "repository": {
         "type": "git",

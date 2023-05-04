@@ -1,5 +1,9 @@
 # vNext
 
+# v0.5.2
+
+-   (bug) Add missing tenantId to `getTokenData`
+
 # v0.5.1
 
 -   (bug) Fix user id extraction

@@ -49,6 +49,7 @@ export const addDataToJwt = async (appSecret: string, token: string, data: Recor
 };
 
 export interface TokenData {
+    tenantId: string;
     userId: string;
     scopes: string[];
     exp: number;
@@ -71,6 +72,7 @@ export const getTokenData = async (
     }
 
     return {
+        tenantId: (payload.tenantId as string) ?? "",
         scopes: (payload.scopes as string[]) ?? [],
         userId: (payload.sub as string) ?? "",
         exp: payload.exp,
