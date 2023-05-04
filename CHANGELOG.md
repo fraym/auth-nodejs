@@ -1,5 +1,9 @@
 # vNext
 
+# v0.5.3
+
+-   (bug) Add missing data to `getTokenData`
+
 # v0.5.2
 
 -   (bug) Add missing tenantId to `getTokenData`

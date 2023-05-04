@@ -53,6 +53,7 @@ export interface TokenData {
     userId: string;
     scopes: string[];
     exp: number;
+    data: any;
 }
 
 export const getTokenData = async (
@@ -76,5 +77,6 @@ export const getTokenData = async (
         scopes: (payload.scopes as string[]) ?? [],
         userId: (payload.sub as string) ?? "",
         exp: payload.exp,
+        data: payload.data,
     };
 };
