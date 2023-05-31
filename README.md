@@ -71,8 +71,6 @@ Parameters:
 
 ### Create the client
 
-management client:
-
 ```typescript
 const managementClient = await newManagementClient();
 ```
