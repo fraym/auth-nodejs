@@ -1,21 +1,15 @@
 import { ManagementServiceClient } from "@fraym/auth-proto";
 import { credentials } from "@grpc/grpc-js";
 import { ClientConfig, useConfigDefaults } from "../config/config";
-import { createNewScope } from "./createScope";
 import { createNewUser, CreateUserResponse } from "./createUser";
 import { deleteExistingRole } from "./deleteRole";
-import { deleteExistingScope } from "./deleteScope";
 import { deleteExistingUser } from "./deleteUser";
 import { getAllRoles, Role } from "./getRoles";
-import { getAllScopes } from "./getScopes";
 import { getAllUsers, User } from "./getUsers";
 import { updateExistingUser } from "./updateUser";
 import { createOrUpdateRole, UpsertRoleScope } from "./upsertRole";
 
 export interface ManagementClient {
-    createScope: (name: string, clientId?: string) => Promise<void>;
-    deleteScope: (name: string, clientId?: string) => Promise<void>;
-    getScopes: (clientId?: string) => Promise<string[]>;
     upsertRole: (
         tenantId: string,
         allowedScopes: UpsertRoleScope[],
@@ -60,18 +54,6 @@ export const newManagementClient = async (config?: ClientConfig): Promise<Manage
             "grpc.keepalive_permit_without_calls": 1,
         }
     );
-
-    const createScope = async (name: string, clientId: string = "") => {
-        await createNewScope(name, clientId, currentConfig);
-    };
-
-    const deleteScope = async (name: string, clientId: string = "") => {
-        await deleteExistingScope(name, clientId, currentConfig);
-    };
-
-    const getScopes = async (clientId: string = "") => {
-        return await getAllScopes(clientId, currentConfig);
-    };
 
     const upsertRole = async (
         tenantId: string,
@@ -150,9 +132,6 @@ export const newManagementClient = async (config?: ClientConfig): Promise<Manage
     };
 
     return {
-        createScope,
-        deleteScope,
-        getScopes,
         upsertRole,
         deleteRole,
         getRoles,

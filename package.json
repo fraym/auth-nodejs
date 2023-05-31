@@ -1,6 +1,6 @@
 {
     "name": "@fraym/auth",
-    "version": "0.5.3",
+    "version": "0.6.0",
     "license": "MIT",
     "homepage": "https://github.com/fraym/auth-nodejs",
     "repository": {
@@ -12,7 +12,7 @@
         "test": "echo \"Error: no test specified\" && exit 0",
         "format": "prettier --write \"**/*.{ts,tsx,json}\"",
         "lint": "prettier --check \"**/*.{ts,tsx,json}\"",
-        "build": "npm run clean && tsc && chmod +x dist/cmd/auth.js",
+        "build": "npm run clean && tsc",
         "clean": "rm -rf dist",
         "prepublishOnly": "npm test && npm run lint && npm run build",
         "preversion": "npm run lint",
@@ -23,9 +23,6 @@
     ],
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
-    "bin": {
-        "auth": "dist/cmd/auth.js"
-    },
     "dependencies": {
         "@fraym/auth-proto": "^0.6.0",
         "@graphql-tools/graphql-file-loader": "^7.5.11",

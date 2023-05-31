@@ -1,5 +1,10 @@
 # vNext
 
+# v0.6.0
+
+-   (bc) Remove scopes http api
+-   (bc) Remove migration command
+
 # v0.5.3
 
 -   (bug) Add missing data to `getTokenData`
