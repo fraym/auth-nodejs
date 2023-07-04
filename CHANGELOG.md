@@ -1,5 +1,9 @@
 # vNext
 
+# v0.6.1
+
+-   (improvement) Add clockTolerance of 5 seconds when verifying a jwt
+
 # v0.6.0
 
 -   (bc) Remove scopes http api

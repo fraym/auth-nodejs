@@ -31,7 +31,9 @@ export const generateJwt = async (
 
 export const addDataToJwt = async (appSecret: string, token: string, data: Record<string, any>) => {
     const secret = new TextEncoder().encode(appSecret);
-    const { payload, protectedHeader } = await jwtVerify(token, secret);
+    const { payload, protectedHeader } = await jwtVerify(token, secret, {
+        clockTolerance: "10 seconds",
+    });
 
     if (!payload.exp) {
         throw Error("expiration time is missing in JWT");
@@ -62,7 +64,9 @@ export const getTokenData = async (
     requireUserId: boolean = true
 ): Promise<TokenData> => {
     const secret = new TextEncoder().encode(appSecret);
-    const { payload } = await jwtVerify(token, secret);
+    const { payload } = await jwtVerify(token, secret, {
+        clockTolerance: "10 seconds",
+    });
 
     if (!payload.exp) {
         throw Error("expiration time is missing in JWT");
