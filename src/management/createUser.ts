@@ -1,4 +1,4 @@
-import { ManagementServiceClient } from "@fraym/auth-proto";
+import { ServiceClient } from "@fraym/proto/freym/auth/management";
 
 export interface CreateUserResponse {
     id: string;
@@ -14,7 +14,7 @@ export const createNewUser = async (
     assignedRoleIds: string[],
     active: boolean,
     blockedUntil: Date,
-    serviceClient: ManagementServiceClient
+    serviceClient: ServiceClient
 ): Promise<CreateUserResponse> => {
     return new Promise<CreateUserResponse>((resolve, reject) => {
         serviceClient.createUser(

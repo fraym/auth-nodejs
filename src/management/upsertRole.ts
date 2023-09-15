@@ -1,4 +1,4 @@
-import { ManagementServiceClient } from "@fraym/auth-proto";
+import { ServiceClient } from "@fraym/proto/freym/auth/management";
 
 export interface UpsertRoleScope {
     scopeName: string;
@@ -9,7 +9,7 @@ export const createOrUpdateRole = async (
     tenantId: string,
     id: string,
     allowedScopes: UpsertRoleScope[],
-    serviceClient: ManagementServiceClient
+    serviceClient: ServiceClient
 ): Promise<string> => {
     return new Promise<string>((resolve, reject) => {
         serviceClient.upsertRole(

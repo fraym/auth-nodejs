@@ -1,4 +1,4 @@
-import { ManagementServiceClient } from "@fraym/auth-proto";
+import { ServiceClient } from "@fraym/proto/freym/auth/management";
 import { credentials } from "@grpc/grpc-js";
 import { ClientConfig, useConfigDefaults } from "../config/config";
 import { createNewUser, CreateUserResponse } from "./createUser";
@@ -45,7 +45,7 @@ export interface ManagementClient {
 
 export const newManagementClient = async (config?: ClientConfig): Promise<ManagementClient> => {
     const currentConfig = useConfigDefaults(config);
-    const serviceClient = new ManagementServiceClient(
+    const serviceClient = new ServiceClient(
         currentConfig.serverAddress,
         credentials.createInsecure(),
         {

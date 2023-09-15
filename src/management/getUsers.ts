@@ -1,4 +1,4 @@
-import { ManagementServiceClient } from "@fraym/auth-proto";
+import { ServiceClient } from "@fraym/proto/freym/auth/management";
 
 export interface User {
     id: string;
@@ -14,7 +14,7 @@ export interface User {
 
 export const getAllUsers = async (
     tenantId: string,
-    serviceClient: ManagementServiceClient
+    serviceClient: ServiceClient
 ): Promise<User[]> => {
     return new Promise<User[]>((resolve, reject) => {
         serviceClient.getUsers(

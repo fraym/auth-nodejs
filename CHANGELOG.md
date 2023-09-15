@@ -1,5 +1,9 @@
 # vNext
 
+# v0.7.0
+
+-   (bc) Use new protobuf lib
+
 # v0.6.1
 
 -   (improvement) Add clockTolerance of 5 seconds when verifying a jwt

@@ -1,4 +1,4 @@
-import { ManagementServiceClient } from "@fraym/auth-proto";
+import { ServiceClient } from "@fraym/proto/freym/auth/management";
 
 export const updateExistingUser = async (
     tenantId: string,
@@ -10,7 +10,7 @@ export const updateExistingUser = async (
     assignedRoleIds: string[],
     active: boolean,
     blockedUntil: Date,
-    serviceClient: ManagementServiceClient
+    serviceClient: ServiceClient
 ): Promise<void> => {
     return new Promise<void>((resolve, reject) => {
         serviceClient.updateUser(
