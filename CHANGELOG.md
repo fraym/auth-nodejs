@@ -1,5 +1,9 @@
 # vNext
 
+# v0.7.1
+
+-   (bug) Fix api
+
 # v0.7.0
 
 -   (bc) Use new protobuf lib

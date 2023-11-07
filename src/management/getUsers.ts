@@ -27,7 +27,23 @@ export const getAllUsers = async (
                     return;
                 }
 
-                resolve(response.users);
+                resolve(
+                    response.users.map(user => {
+                        const newUser: User = {
+                            active: user.active,
+                            assignedRoleIds: user.assignedRoleIds,
+                            blockedUntil: parseInt(user.blockedUntil),
+                            displayName: user.displayName,
+                            email: user.email,
+                            failedAttempts: parseInt(user.failedAttempts),
+                            id: user.id,
+                            lastAttempt: parseInt(user.lastAttempt),
+                            login: user.login,
+                        };
+
+                        return newUser;
+                    })
+                );
             }
         );
     });

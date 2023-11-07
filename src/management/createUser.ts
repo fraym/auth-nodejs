@@ -26,7 +26,7 @@ export const createNewUser = async (
                 password,
                 active,
                 assignedRoleIds,
-                blockedUntil: blockedUntil.getTime(),
+                blockedUntil: blockedUntil.getTime().toString(),
             },
             (error, response) => {
                 if (error) {

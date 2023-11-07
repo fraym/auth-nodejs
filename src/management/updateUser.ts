@@ -23,7 +23,7 @@ export const updateExistingUser = async (
                 password,
                 active,
                 assignedRoleIds,
-                blockedUntil: blockedUntil.getTime(),
+                blockedUntil: blockedUntil.getTime().toString(),
             },
             error => {
                 if (error) {
