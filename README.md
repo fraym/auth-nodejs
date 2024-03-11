@@ -10,14 +10,14 @@ npm i @fraym/auth
 
 ## GraphQL
 
-You can access the graphQL api at `http://auth:3000/management/graphql`.
+You can access the GraphQL API at `http://auth:3000/management/graphql`.
 There is a sandbox available at `http://auth:3000/management/graphql/sandbox`.
 
 You need to add the `Tenant-Id` header in order to use the graphQL Endpoint and the sandbox.
 
 ### Config
 
-Use a `.env` file or env variables to configure cte clients and the command:
+Use a `.env` file or env variables to configure the clients and the command:
 
 | variable name | default | use                                                              |
 | ------------- | ------- | ---------------------------------------------------------------- |
