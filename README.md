@@ -10,18 +10,18 @@ npm i @fraym/auth
 
 ## GraphQL
 
-You can access the graphQL api at `http://auth:3000/management/graphql`.
+You can access the GraphQL API at `http://auth:3000/management/graphql`.
 There is a sandbox available at `http://auth:3000/management/graphql/sandbox`.
 
 You need to add the `Tenant-Id` header in order to use the graphQL Endpoint and the sandbox.
 
 ### Config
 
-Use a `.env` file or env variables to configure cte clients and the command:
+Use a `.env` file or env variables to configure the clients and the command:
 
-```env
-AUTH_SERVER_ADDRESS=127.0.0.1:9000
-```
+| variable name | default | use                                                              |
+| ------------- | ------- | ---------------------------------------------------------------- |
+| AUTH_SECRET   |         | secret used for by auth client (the secred used to sign the jwt) |
 
 ## JWT functions
 
@@ -156,7 +156,7 @@ With all optional parameters:
 ```typescript
 const isActive = true;
 const blockedUntil = new Date();
-await managementClient.createUser("TENANT_ID", "USER_ID", "E-MAIL", ["ROLE_ID"]. "LOGIN_NAME", "DISPLAY_NAME", "PASSWORD", isActive, blockedUntil);
+await managementClient.updateUser("TENANT_ID", "USER_ID", "E-MAIL", ["ROLE_ID"]. "LOGIN_NAME", "DISPLAY_NAME", "PASSWORD", isActive, blockedUntil);
 ```
 
 `LOGIN_NAME`: A name used for login instead of the email address.
